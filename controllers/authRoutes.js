@@ -30,7 +30,7 @@ const allowAccess = async (req , res)=> {
     user = JSON.stringify(user);
     // console.log(user);
     const token = jwt.sign({user} , process.env.SECRET_KEY);
-    res.cookie('token' , token , {expires: Date.now() + 1000 * 60 * 60 * 24 * 7 , maxAge : 1000 * 60 * 60 * 24 * 7 , httpOnly : true});
+    res.cookie('token' , token , {expires: Date.now() + 1000 * 60 * 60 * 24 * 7 , maxAge : 1000 * 60 * 60 * 24 * 7 , httpOnly : true, secure: true, sameSite: "none"});
     user = JSON.parse(user);
     // let obj = {
     //     name: user.username,
@@ -43,7 +43,7 @@ const allowAccess = async (req , res)=> {
 
 const disableAccess = (req , res)=> {
     if (req.cookies.token) {
-        res.clearCookie('token');
+        res.clearCookie('token', {httpOnly : true, secure: true, sameSite: "none"});
     }
     res.json({msg : 'Logged out successfully'});
 }
