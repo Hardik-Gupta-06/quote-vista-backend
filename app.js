@@ -25,7 +25,7 @@ mongoose.connect(MONGODBURL)
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors( {origin: ['http://localhost:3000'] , credentials: true}))
+app.use(cors( {origin: ["https://quote-vista-front.vercel.app", "http://localhost:3000"] , credentials: true}))
 app.use(quotesRoutes);
 app.use(authRoutes);
 
